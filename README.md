@@ -1,7 +1,7 @@
 # localdic
 
-The local dictionary affects AppleSpell service that does spell checking on Mac.
-Special words added to the local dictionary will be treat as correct.
+* The local dictionary affects AppleSpell service that does spell checking on Mac.
+* Special words added to the local dictionary will be treat as correct.
 
 ```Shell
 OVERVIEW: A tool for managing local dictionary on Mac.
