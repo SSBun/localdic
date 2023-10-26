@@ -81,6 +81,15 @@ struct Learn: ParsableCommand {
 
 struct Forget: ParsableCommand {
     
+    static var configuration: CommandConfiguration = .init(
+        abstract: "Remove words from the local dictionary.",
+        usage: """
+            \("localdic forget".green) llvm ffmpeg    :remove words with strings
+            \("localdic forget".green) 2 6            :remove words with indexes that you can check executing \("localdic list".green)
+            \("localdic forget".green) 2 llvm         :remove words by mixing strings and indexes.
+            """
+    )
+    
     @Argument(help: "Input \("words".green) or \("indexes".green) that you want to remove.")
     var words: [String]
     
