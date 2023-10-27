@@ -20,3 +20,10 @@ SUBCOMMANDS:
   learn                   Save words to the local dictionary.
   forget                  Remove words from the local dictionary.
 ```
+
+## Installation
+
+```shell
+brew tap ssbun/formulae
+brew install localdic
+```
