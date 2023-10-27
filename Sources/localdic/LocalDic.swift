@@ -15,7 +15,7 @@ struct LocalDic: ParsableCommand {
                \("localdic forget".green) <word>
                \("localdic --help".green)
                """,
-        version: "0.1",
+        version: "0.1.2",
         subcommands: [
             List.self,
             Learn.self,
