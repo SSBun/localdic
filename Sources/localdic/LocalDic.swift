@@ -70,10 +70,7 @@ struct Learn: ParsableCommand {
         localWords.append(contentsOf: uniqueWords)
         try FileTool.override(words: localWords)
         try restartAppleSpellService()
-        print("Words below are added successfully.\n".green)
-        for word in localWords {
-            print("\(word)".red)
-        }
+        print("Words you input are added successfully".green)
     }
 }
 
