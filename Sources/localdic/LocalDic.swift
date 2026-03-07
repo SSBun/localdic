@@ -1,6 +1,7 @@
 import ArgumentParser
 import Foundation
 import Rainbow
+import SwiftUI
 
 // MARK: - LocalDic
 
@@ -20,13 +21,101 @@ struct LocalDic: ParsableCommand {
             List.self,
             Learn.self,
             Forget.self,
+            GUI.self
         ],
+        defaultSubcommand: GUI.self,
         helpNames: .shortAndLong
     )
     
     func run() throws {
         var command = try LocalDic.parseAsRoot(["--help"])
         try command.run()
+    }
+}
+
+
+class GUIApp: NSObject {
+    static let shared: GUIApp = .init()
+    
+    let application: NSApplication
+    let window: NSWindow
+    
+    override init() {
+        application = NSApplication.shared
+        window = .init(
+            contentRect: .zero,
+            styleMask: [.titled, .closable, .resizable],
+            backing: .buffered,
+            defer: false
+        )
+        super.init()
+        
+        application.setActivationPolicy(.regular)
+        
+        window.center()
+        window.title = "Local Dictionary"
+        window.titlebarAppearsTransparent = true
+        window.makeKeyAndOrderFront(window)
+        window.delegate = self
+        
+        application.delegate = self
+        application.activate(ignoringOtherApps: true)
+        application.run()
+    }
+}
+
+extension String: Identifiable {
+    public var id: String { self }
+}
+
+struct GUIView: View {
+    @State var words: [String]
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            SwiftUI.List {
+                ForEach(words) { word in
+                    Text(word)
+                }
+            }
+            HStack(spacing: 20) {
+                Button(action: {}, label: {
+                    Text("Abort")
+                })
+                .buttonStyle(.automatic)
+                Button(action: {}, label: {
+                    Text("Save")
+                })
+            }
+            .padding(.vertical, 10)
+        }
+        .frame(minWidth: 200, maxWidth: .infinity, minHeight: 300, maxHeight: .infinity)
+    }
+}
+
+extension GUIApp: NSApplicationDelegate {
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        let words = (try? FileTool.fetchWords()) ?? []
+        window.contentViewController = NSHostingController(rootView: GUIView(words: words))
+    }
+}
+
+extension GUIApp: NSWindowDelegate {
+    func windowWillClose(_ notification: Notification) {
+        NSApplication.shared.terminate(0)
+    }
+}
+
+struct GUI: ParsableCommand {
+    static var configuration: CommandConfiguration = .init(
+        abstract: "Open GUI to edit the local dictionary.",
+        usage: """
+        \("localdic gui".green)
+        """
+    )
+    
+    func run() throws {
+        _ = GUIApp.shared
     }
 }
 

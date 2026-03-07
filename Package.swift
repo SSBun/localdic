@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "localdic",
+    platforms: [.macOS(.v12)],
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser.git", .upToNextMajor(from: "1.0.0")),
         .package(url: "https://github.com/onevcat/Rainbow.git", from: "4.0.1"),
