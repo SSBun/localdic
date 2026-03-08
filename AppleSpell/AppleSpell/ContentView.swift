@@ -6,19 +6,33 @@ struct ContentView: View {
     @State private var newWord: String = ""
 
     var body: some View {
-        ZStack {
-            // Background - extends to all edges
+        ZStack(alignment: .topLeading) {
+            // Background - blur effect fills entire window
             VisualEffectView(material: .hudWindow, blendingMode: .behindWindow)
-                .ignoresSafeArea()
+                .edgesIgnoringSafeArea(.all)
 
             VStack(spacing: 0) {
-                // Search bar - with padding for traffic lights
+                // Custom top bar - aligned to top of screen
+                HStack {
+                    Spacer()
+
+                    Text("AppleSpell")
+                        .font(.headline)
+                        .foregroundColor(.primary)
+
+                    Spacer()
+                }
+                .frame(height: 28)
+                .frame(maxWidth: .infinity)
+                .background(Color.clear)
+
+                // Search bar
                 SearchBarView(searchText: $viewModel.searchText)
                     .padding(.horizontal, 20)
-                    .padding(.top, 50)
+                    .padding(.top, 8)
                     .padding(.bottom, 8)
 
-                // Word list
+                // Word list - fills middle space
                 WordListView(
                     words: viewModel.filteredWords,
                     onDelete: viewModel.removeWords
@@ -31,32 +45,36 @@ struct ContentView: View {
                 .padding(.horizontal, 20)
                 .padding(.vertical, 12)
 
-                // Footer with action buttons
-                HStack {
+                // Footer with action buttons - modern style
+                HStack(spacing: 16) {
                     Text("\(viewModel.wordCount) words")
                         .font(.caption)
                         .foregroundColor(.secondary)
 
                     Spacer()
 
-                    Button("Import") {
-                        viewModel.importWords()
-                    }
-                    .buttonStyle(.borderless)
+                    HStack(spacing: 8) {
+                        Button(action: { viewModel.importWords() }) {
+                            Label("Import", systemImage: "square.and.arrow.down")
+                        }
+                        .buttonStyle(.bordered)
 
-                    Button("Export") {
-                        viewModel.exportWords()
-                    }
-                    .buttonStyle(.borderless)
+                        Button(action: { viewModel.exportWords() }) {
+                            Label("Export", systemImage: "square.and.arrow.up")
+                        }
+                        .buttonStyle(.bordered)
 
-                    Button("Refresh") {
-                        viewModel.loadWords()
+                        Button(action: { viewModel.loadWords() }) {
+                            Label("Refresh", systemImage: "arrow.clockwise")
+                        }
+                        .buttonStyle(.bordered)
                     }
-                    .buttonStyle(.borderless)
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 12)
             }
+            .frame(maxHeight: .infinity)
+            .edgesIgnoringSafeArea(.top)
         }
         .frame(minWidth: 400, minHeight: 600)
         .alert("Error", isPresented: $viewModel.showingError) {

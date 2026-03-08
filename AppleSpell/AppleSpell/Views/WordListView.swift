@@ -26,11 +26,20 @@ struct WordListView: View {
                         HStack {
                             Text(word)
                                 .font(.system(.body, design: .monospaced))
+
                             Spacer()
                         }
                         .listRowBackground(Color.clear)
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button(role: .destructive) {
+                                if let index = words.firstIndex(of: word) {
+                                    onDelete(IndexSet(integer: index))
+                                }
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
+                        }
                     }
-                    .onDelete(perform: onDelete)
                 }
                 .listStyle(.plain)
                 .scrollContentBackground(.hidden)

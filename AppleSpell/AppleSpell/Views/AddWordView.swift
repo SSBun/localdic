@@ -29,11 +29,12 @@ struct AddWordView: View {
             .buttonStyle(.borderedProminent)
             .disabled(newWord.trimmingCharacters(in: .whitespaces).isEmpty)
         }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 12)
     }
 }
 
 #Preview {
     AddWordView(newWord: .constant("test"), onAdd: {})
-        .padding()
-        .background(.ultraThinMaterial)
+        .background(Color(NSColor.windowBackgroundColor))
 }
