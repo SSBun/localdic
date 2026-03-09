@@ -285,9 +285,11 @@ body::before {
 }
 
 .screenshot-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 32px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .screenshot {
@@ -295,6 +297,8 @@ body::before {
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid var(--border);
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .screenshot img {
