@@ -3,7 +3,8 @@ layout: default
 title: AppleSpell - macOS Local Dictionary Manager
 ---
 
-<div class="hero">
+<!-- Hero Section -->
+<section class="hero">
   <div class="hero-content">
     <h1>AppleSpell</h1>
     <p class="tagline">A beautiful native macOS app for managing your local dictionary</p>
@@ -21,9 +22,10 @@ title: AppleSpell - macOS Local Dictionary Manager
 
     <div class="version">Version 1.0.0</div>
   </div>
-</div>
+</section>
 
-<div class="features">
+<!-- Features Section -->
+<section class="features">
   <h2>Features</h2>
   <div class="feature-grid">
     <div class="feature">
@@ -57,9 +59,10 @@ title: AppleSpell - macOS Local Dictionary Manager
       <p>Built-in update checker</p>
     </div>
   </div>
-</div>
+</section>
 
-<div class="screenshots">
+<!-- Screenshots Section -->
+<section class="screenshots">
   <h2>Screenshots</h2>
   <div class="screenshot-grid">
     <div class="screenshot">
@@ -69,9 +72,10 @@ title: AppleSpell - macOS Local Dictionary Manager
       <img src="https://via.placeholder.com/600x400?text=AppleSpell+Settings" alt="AppleSpell Settings" />
     </div>
   </div>
-</div>
+</section>
 
-<div class="installation">
+<!-- Installation Section -->
+<section class="installation">
   <h2>Installation</h2>
   <div class="install-steps">
     <div class="step">
@@ -91,20 +95,22 @@ title: AppleSpell - macOS Local Dictionary Manager
       <p>Launch and enjoy!</p>
     </div>
   </div>
-</div>
+</section>
 
-<div class="alternatives">
+<!-- Alternatives Section -->
+<section class="alternatives">
   <h2>Alternative: CLI Tool</h2>
   <p>Prefer command line? Install the <code>localdic</code> CLI tool:</p>
   <pre><code>brew tap ssbun/formulae
 brew install localdic</code></pre>
-</div>
+</section>
 
-<div class="footer">
+<!-- Footer -->
+<footer class="footer">
   <p>AppleSpell &copy; 2026 SSBun. Released under MIT License.</p>
   <p>
     <a href="https://github.com/SSBun/localdic">GitHub</a> •
     <a href="https://github.com/SSBun/localdic/releases">Releases</a> •
     <a href="https://github.com/SSBun/localdic/issues">Issues</a>
   </p>
-</div>
+</footer>

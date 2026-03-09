@@ -3,11 +3,11 @@
 :root {
   --primary-color: #007AFF;
   --secondary-color: #5856D6;
-  --background-color: #000000;
-  --surface-color: #1C1C1E;
-  --text-primary: #FFFFFF;
-  --text-secondary: #8E8E93;
-  --border-color: #38383A;
+  --background-color: #F5F5F7;
+  --surface-color: #FFFFFF;
+  --text-primary: #1D1D1F;
+  --text-secondary: #86868B;
+  --border-color: #D2D2D7;
 }
 
 * {
@@ -33,7 +33,7 @@ body {
 .hero {
   text-align: center;
   padding: 80px 20px;
-  background: linear-gradient(180deg, var(--surface-color) 0%, var(--background-color) 100%);
+  background: linear-gradient(180deg, #FFFFFF 0%, var(--background-color) 100%);
 }
 
 .hero h1 {
@@ -69,6 +69,8 @@ body {
   font-weight: 600;
   text-decoration: none;
   transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
 }
 
 .btn-download {
@@ -88,7 +90,7 @@ body {
 }
 
 .btn-github:hover {
-  background: var(--border-color);
+  background: #E8E8ED;
 }
 
 .btn-icon {
@@ -105,10 +107,12 @@ body {
 .features {
   padding: 60px 20px;
   text-align: center;
+  background: var(--background-color);
 }
 
 .features h2 {
   font-size: 36px;
+  font-weight: 600;
   margin-bottom: 40px;
 }
 
@@ -125,11 +129,12 @@ body {
   padding: 32px 24px;
   border-radius: 16px;
   border: 1px solid var(--border-color);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .feature:hover {
   transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
 }
 
 .feature-icon {
@@ -151,10 +156,12 @@ body {
 .screenshots {
   padding: 60px 20px;
   text-align: center;
+  background: var(--surface-color);
 }
 
 .screenshots h2 {
   font-size: 36px;
+  font-weight: 600;
   margin-bottom: 40px;
 }
 
@@ -162,23 +169,26 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .screenshot img {
   width: 100%;
   border-radius: 12px;
-  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 /* Installation Section */
 .installation {
   padding: 60px 20px;
   text-align: center;
-  background: var(--surface-color);
+  background: var(--background-color);
 }
 
 .installation h2 {
   font-size: 36px;
+  font-weight: 600;
   margin-bottom: 40px;
 }
 
@@ -186,7 +196,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 24px;
+  gap: 32px;
   max-width: 800px;
   margin: 0 auto;
 }
@@ -200,25 +210,34 @@ body {
 }
 
 .step-number {
-  width: 36px;
-  height: 36px;
-  background: var(--primary-color);
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
   flex-shrink: 0;
+  font-size: 18px;
+}
+
+.step p {
+  color: var(--text-secondary);
+  font-size: 14px;
 }
 
 /* Alternatives Section */
 .alternatives {
   padding: 60px 20px;
   text-align: center;
+  background: var(--surface-color);
 }
 
 .alternatives h2 {
   font-size: 28px;
+  font-weight: 600;
   margin-bottom: 20px;
 }
 
@@ -228,7 +247,7 @@ body {
 }
 
 .alternatives pre {
-  background: var(--surface-color);
+  background: #F5F5F7;
   padding: 20px;
   border-radius: 12px;
   display: inline-block;
@@ -245,12 +264,13 @@ body {
 .footer {
   text-align: center;
   padding: 40px 20px;
+  background: var(--background-color);
   border-top: 1px solid var(--border-color);
-  color: var(--text-secondary);
 }
 
 .footer p {
   margin-bottom: 8px;
+  color: var(--text-secondary);
 }
 
 .footer a {
@@ -285,5 +305,15 @@ body {
   .btn {
     width: 100%;
     justify-content: center;
+  }
+
+  .install-steps {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .step {
+    flex-direction: column;
+    text-align: center;
   }
 }
