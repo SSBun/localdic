@@ -5,112 +5,131 @@ title: AppleSpell - macOS Local Dictionary Manager
 
 <!-- Hero Section -->
 <section class="hero">
-  <div class="hero-content">
-    <h1>AppleSpell</h1>
-    <p class="tagline">A beautiful native macOS app for managing your local dictionary</p>
+  <div class="container">
+    <div class="hero-badge">
+      <span>✨</span>
+      Open Source App
+    </div>
+    <h1>Apple<span class="highlight">Spell</span></h1>
+    <p>A beautiful native macOS app for managing your local dictionary. Control how your Mac corrects words.</p>
 
     <div class="badges">
-      <a href="https://github.com/SSBun/localdic/releases/latest" class="btn btn-download">
+      <a href="https://github.com/SSBun/localdic/releases/latest" class="btn btn-primary">
         <span class="btn-icon">⬇️</span>
         Download Latest
       </a>
-      <a href="https://github.com/SSBun/localdic" class="btn btn-github">
+      <a href="https://github.com/SSBun/localdic" class="btn btn-secondary">
         <span class="btn-icon">🐙</span>
         View on GitHub
       </a>
     </div>
-
-    <div class="version">Version 1.0.0</div>
   </div>
 </section>
 
 <!-- Features Section -->
-<section class="features">
-  <h2>Features</h2>
-  <div class="feature-grid">
-    <div class="feature">
-      <div class="feature-icon">🔍</div>
-      <h3>Search & Filter</h3>
-      <p>Quickly find words in your dictionary with instant search</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">➕</div>
-      <h3>Easy Add</h3>
-      <p>Add single or multiple words at once</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">🗑️</div>
-      <h3>Simple Remove</h3>
-      <p>Delete words with swipe or button</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">📥</div>
-      <h3>Import</h3>
-      <p>Import words from text files</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">📤</div>
-      <h3>Export</h3>
-      <p>Export words to share with others</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">⚙️</div>
-      <h3>Auto Updates</h3>
-      <p>Built-in update checker</p>
+<section class="features" id="features">
+  <div class="container">
+    <h2>Powerful Features</h2>
+    <p>Everything you need to manage your local dictionary</p>
+
+    <div class="feature-grid">
+      <div class="feature">
+        <div class="feature-icon">🔍</div>
+        <h3>Search & Filter</h3>
+        <p>Quickly find words in your dictionary with instant search and filtering</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">➕</div>
+        <h3>Easy Add</h3>
+        <p>Add single or multiple words at once. Support batch import</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🗑️</div>
+        <h3>Simple Remove</h3>
+        <p>Delete words with swipe or button. Remove multiple at once</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📥</div>
+        <h3>Import Words</h3>
+        <p>Import words from text files. Support plain text format</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📤</div>
+        <h3>Export Words</h3>
+        <p>Export words to share with others. One word per line</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">⚡</div>
+        <h3>Auto Refresh</h3>
+        <p>Automatically refresh when dictionary changes externally</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- Screenshots Section -->
-<section class="screenshots">
-  <h2>Screenshots</h2>
-  <div class="screenshot-grid">
-    <div class="screenshot">
-      <img src="https://via.placeholder.com/600x400?text=AppleSpell+Main+View" alt="AppleSpell Main View" />
-    </div>
-    <div class="screenshot">
-      <img src="https://via.placeholder.com/600x400?text=AppleSpell+Settings" alt="AppleSpell Settings" />
+<section class="screenshots" id="screenshots">
+  <div class="container">
+    <h2>Screenshots</h2>
+    <p>Clean and modern interface designed for macOS</p>
+
+    <div class="screenshot-grid">
+      <div class="screenshot">
+        <img src="https://via.placeholder.com/800x500?text=AppleSpell+Main+View" alt="AppleSpell Main View" />
+      </div>
+      <div class="screenshot">
+        <img src="https://via.placeholder.com/800x500?text=AppleSpell+Settings" alt="AppleSpell Settings" />
+      </div>
     </div>
   </div>
 </section>
 
 <!-- Installation Section -->
-<section class="installation">
-  <h2>Installation</h2>
-  <div class="install-steps">
-    <div class="step">
-      <span class="step-number">1</span>
-      <p>Download the latest release from GitHub</p>
-    </div>
-    <div class="step">
-      <span class="step-number">2</span>
-      <p>Open the .dmg file</p>
-    </div>
-    <div class="step">
-      <span class="step-number">3</span>
-      <p>Drag AppleSpell to Applications</p>
-    </div>
-    <div class="step">
-      <span class="step-number">4</span>
-      <p>Launch and enjoy!</p>
+<section class="installation" id="installation">
+  <div class="container">
+    <h2>Installation</h2>
+    <p>Get started in minutes</p>
+
+    <div class="install-steps">
+      <div class="step">
+        <span class="step-number">1</span>
+        <p>Download the latest release from GitHub</p>
+      </div>
+      <div class="step">
+        <span class="step-number">2</span>
+        <p>Open the .dmg file</p>
+      </div>
+      <div class="step">
+        <span class="step-number">3</span>
+        <p>Drag AppleSpell to Applications</p>
+      </div>
+      <div class="step">
+        <span class="step-number">4</span>
+        <p>Launch and enjoy!</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Alternatives Section -->
-<section class="alternatives">
-  <h2>Alternative: CLI Tool</h2>
-  <p>Prefer command line? Install the <code>localdic</code> CLI tool:</p>
-  <pre><code>brew tap ssbun/formulae
-brew install localdic</code></pre>
-</section>
+<!-- CLI Tool Section -->
+<section class="cli" id="cli">
+  <div class="container">
+    <h2>CLI Tool</h2>
+    <p>Prefer command line? Use the localdic CLI tool</p>
 
-<!-- Footer -->
-<footer class="footer">
-  <p>AppleSpell &copy; 2026 SSBun. Released under MIT License.</p>
-  <p>
-    <a href="https://github.com/SSBun/localdic">GitHub</a> •
-    <a href="https://github.com/SSBun/localdic/releases">Releases</a> •
-    <a href="https://github.com/SSBun/localdic/issues">Issues</a>
-  </p>
-</footer>
+    <div class="cli-code">
+<pre><code><span class="comment"># Install via Homebrew</span>
+brew tap ssbun/formulae
+brew install localdic
+
+<span class="comment"># List all words</span>
+localdic list
+
+<span class="comment"># Add words</span>
+localdic learn ffmpeg llvm swift
+
+<span class="comment"># Remove words</span>
+localdic forget ffmpeg</code></pre>
+    </div>
+  </div>
+</section>
