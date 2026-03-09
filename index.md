@@ -75,10 +75,7 @@ title: AppleSpell - macOS Local Dictionary Manager
 
     <div class="screenshot-grid">
       <div class="screenshot">
-        <img src="https://via.placeholder.com/800x500?text=AppleSpell+Main+View" alt="AppleSpell Main View" />
-      </div>
-      <div class="screenshot">
-        <img src="https://via.placeholder.com/800x500?text=AppleSpell+Settings" alt="AppleSpell Settings" />
+        <img src="https://ssbun-lot.oss-cn-beijing.aliyuncs.com/img/20260309142051.png" alt="AppleSpell Main View" />
       </div>
     </div>
   </div>
