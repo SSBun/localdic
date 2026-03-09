@@ -1,0 +1,27 @@
+title: AppleSpell
+description: A beautiful native macOS app for managing your local dictionary
+github_username: SSBun
+github_repo: localdic
+
+# Jekyll settings
+markdown: kramdown
+theme: null
+plugins:
+  - jekyll-seo-tag
+  - jekyll-feed
+
+# Exclude from processing
+exclude:
+  - AppleSpell/
+  - Sources/
+  - Tests/
+  - Package.resolved
+  - Package.swift
+  - Makefile
+
+# GitHub Pages settings
+url: "https://ssbun.github.io"
+baseurl: "/localdic"
+
+# Build settings
+timezone: Asia/Shanghai
