@@ -3,6 +3,7 @@ import SwiftUI
 struct WordListView: View {
     let words: [String]
     let onDelete: (IndexSet) -> Void
+    let onRemove: (String) -> Void
 
     var body: some View {
         VStack(spacing: 0) {
@@ -28,18 +29,16 @@ struct WordListView: View {
                                 .font(.system(.body, design: .monospaced))
 
                             Spacer()
+
+                            Button(action: { onRemove(word) }) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundColor(.secondary)
+                            }
+                            .buttonStyle(.plain)
                         }
                         .listRowBackground(Color.clear)
-                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            Button(role: .destructive) {
-                                if let index = words.firstIndex(of: word) {
-                                    onDelete(IndexSet(integer: index))
-                                }
-                            } label: {
-                                Label("Delete", systemImage: "trash")
-                            }
-                        }
                     }
+                    .onDelete(perform: onDelete)
                 }
                 .listStyle(.plain)
                 .scrollContentBackground(.hidden)
@@ -51,7 +50,8 @@ struct WordListView: View {
 #Preview {
     WordListView(
         words: ["hello", "world", "swift", "apple"],
-        onDelete: { _ in }
+        onDelete: { _ in },
+        onRemove: { _ in }
     )
     .background(.ultraThinMaterial)
 }

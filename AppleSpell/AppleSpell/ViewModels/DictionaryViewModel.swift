@@ -10,9 +10,6 @@ class DictionaryViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var showingError: Bool = false
 
-    private var fileMonitor: DispatchSourceFileSystemObject?
-    private var monitorFileDescriptor: Int32 = -1
-
     var filteredWords: [String] {
         if searchText.isEmpty {
             return words.sorted()
@@ -28,11 +25,6 @@ class DictionaryViewModel: ObservableObject {
 
     init() {
         loadWords()
-        startFileMonitoring()
-    }
-
-    func cleanup() {
-        stopFileMonitoring()
     }
 
     // MARK: - File Operations
@@ -59,12 +51,7 @@ class DictionaryViewModel: ObservableObject {
         var updatedWords = words
         updatedWords.append(contentsOf: uniqueNewWords)
 
-        do {
-            try DictionaryService.saveWords(updatedWords)
-            words = updatedWords
-        } catch {
-            showError(error.localizedDescription)
-        }
+        saveWords(updatedWords)
     }
 
     func removeWords(at offsets: IndexSet) {
@@ -72,18 +59,17 @@ class DictionaryViewModel: ObservableObject {
         var updatedWords = words
         updatedWords.removeAll { wordsToRemove.contains($0) }
 
-        do {
-            try DictionaryService.saveWords(updatedWords)
-            words = updatedWords
-        } catch {
-            showError(error.localizedDescription)
-        }
+        saveWords(updatedWords)
     }
 
     func removeWord(_ word: String) {
         var updatedWords = words
         updatedWords.removeAll { $0 == word }
 
+        saveWords(updatedWords)
+    }
+
+    private func saveWords(_ updatedWords: [String]) {
         do {
             try DictionaryService.saveWords(updatedWords)
             words = updatedWords
@@ -132,42 +118,6 @@ class DictionaryViewModel: ObservableObject {
         } catch {
             showError("Failed to export file: \(error.localizedDescription)")
         }
-    }
-
-    // MARK: - File Monitoring
-
-    private func startFileMonitoring() {
-        let fileManager = FileManager.default
-        let path = DictionaryService.localDicPath
-        guard fileManager.fileExists(atPath: path) else { return }
-
-        monitorFileDescriptor = open(path, O_EVTONLY)
-        guard monitorFileDescriptor >= 0 else { return }
-
-        let source = DispatchSource.makeFileSystemObjectSource(
-            fileDescriptor: monitorFileDescriptor,
-            eventMask: [.write, .delete, .rename],
-            queue: .main
-        )
-
-        source.setEventHandler { [weak self] in
-            Task { @MainActor [weak self] in
-                self?.loadWords()
-            }
-        }
-
-        let descriptor = monitorFileDescriptor
-        source.setCancelHandler {
-            close(descriptor)
-        }
-
-        source.resume()
-        fileMonitor = source
-    }
-
-    private func stopFileMonitoring() {
-        fileMonitor?.cancel()
-        fileMonitor = nil
     }
 
     // MARK: - Error Handling

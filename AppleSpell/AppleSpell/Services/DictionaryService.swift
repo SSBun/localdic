@@ -24,34 +24,10 @@ enum DictionaryService {
     }
 
     /// Save words to the local dictionary
+    /// Note: macOS automatically reloads the dictionary when the file changes
     static func saveWords(_ words: [String]) throws {
         let content = words.joined(separator: "\n")
         try content.write(toFile: localDicPath, atomically: true, encoding: .utf8)
-        try restartAppleSpellService()
-    }
-
-    /// Restart the AppleSpell service to apply changes
-    static func restartAppleSpellService() throws {
-        let process = Process()
-        process.launchPath = "/bin/bash"
-        process.arguments = ["-c", "killall -KILL AppleSpell"]
-
-        let errorPipe = Pipe()
-        process.standardError = errorPipe
-
-        try process.run()
-        process.waitUntilExit()
-
-        let errorData = errorPipe.fileHandleForReading.readDataToEndOfFile()
-        let errorString = String(data: errorData, encoding: .utf8)
-
-        if let error = errorString, !error.isEmpty {
-            // Ignore "No matching processes" error
-            if error.contains("No matching processes") {
-                return
-            }
-            throw AppleSpellError.restartFailed(error)
-        }
     }
 }
 

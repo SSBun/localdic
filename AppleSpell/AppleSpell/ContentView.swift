@@ -2,7 +2,7 @@ import SwiftUI
 import AppKit
 
 struct ContentView: View {
-    @StateObject private var viewModel = DictionaryViewModel()
+    @EnvironmentObject private var viewModel: DictionaryViewModel
     @State private var newWord: String = ""
 
     var body: some View {
@@ -35,7 +35,8 @@ struct ContentView: View {
                 // Word list - fills middle space
                 WordListView(
                     words: viewModel.filteredWords,
-                    onDelete: viewModel.removeWords
+                    onDelete: viewModel.removeWords,
+                    onRemove: viewModel.removeWord
                 )
 
                 // Add word section
@@ -45,30 +46,18 @@ struct ContentView: View {
                 .padding(.horizontal, 20)
                 .padding(.vertical, 12)
 
-                // Footer with action buttons - modern style
-                HStack(spacing: 16) {
+                // Footer with word count and refresh
+                HStack {
                     Text("\(viewModel.wordCount) words")
                         .font(.caption)
                         .foregroundColor(.secondary)
 
                     Spacer()
 
-                    HStack(spacing: 8) {
-                        Button(action: { viewModel.importWords() }) {
-                            Label("Import", systemImage: "square.and.arrow.down")
-                        }
-                        .buttonStyle(.bordered)
-
-                        Button(action: { viewModel.exportWords() }) {
-                            Label("Export", systemImage: "square.and.arrow.up")
-                        }
-                        .buttonStyle(.bordered)
-
-                        Button(action: { viewModel.loadWords() }) {
-                            Label("Refresh", systemImage: "arrow.clockwise")
-                        }
-                        .buttonStyle(.bordered)
+                    Button(action: { viewModel.loadWords() }) {
+                        Label("Refresh", systemImage: "arrow.clockwise")
                     }
+                    .buttonStyle(.bordered)
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 12)
@@ -115,4 +104,5 @@ struct VisualEffectView: NSViewRepresentable {
 
 #Preview {
     ContentView()
+        .environmentObject(DictionaryViewModel())
 }
