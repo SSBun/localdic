@@ -43,6 +43,7 @@ jobs:
       - name: Build app
         run: |
           xcodebuild \
+            -project AppleSpell/AppleSpell.xcodeproj \
             -scheme AppleSpell \
             -configuration Release \
             -derivedDataPath build \
