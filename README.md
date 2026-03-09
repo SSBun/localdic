@@ -2,6 +2,8 @@
 
 A tool for managing the macOS local dictionary. Manage custom words for AppleSpell spell checking service.
 
+**Official Website:** [https://ssbun.github.io/localdic/](https://ssbun.github.io/localdic/)
+
 ## Products
 
 ### AppleSpell - macOS App
@@ -21,6 +23,7 @@ A beautiful native macOS app for managing your local dictionary with a modern UI
 - ⚙️ Settings page with update checker
 
 **Download:**
+- [Official Website](https://ssbun.github.io/localdic/)
 - [Latest Release](https://github.com/SSBun/localdic/releases/latest)
 
 ---
