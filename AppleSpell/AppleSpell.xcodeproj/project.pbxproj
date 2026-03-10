@@ -251,7 +251,7 @@
 				CODE_SIGN_ENTITLEMENTS = AppleSpell/AppleSpell.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"AppleSpell/Preview Content\"";
 				DEVELOPMENT_TEAM = 7467638S34;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -262,7 +262,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.csl.cool.AppleSpell;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -278,7 +278,7 @@
 				CODE_SIGN_ENTITLEMENTS = AppleSpell/AppleSpell.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"AppleSpell/Preview Content\"";
 				DEVELOPMENT_TEAM = 7467638S34;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -289,7 +289,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.csl.cool.AppleSpell;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
