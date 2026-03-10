@@ -12,12 +12,12 @@ struct WordListView: View {
                     Spacer()
                     Image(systemName: "text.book.closed")
                         .font(.system(size: 40))
-                        .foregroundColor(.secondary.opacity(0.5))
+                        .foregroundColor(.secondary)
                     Text("No words in dictionary")
                         .foregroundColor(.secondary)
                     Text("Add words using the field below")
                         .font(.caption)
-                        .foregroundColor(.secondary.opacity(0.7))
+                        .foregroundColor(.secondary)
                     Spacer()
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -27,6 +27,8 @@ struct WordListView: View {
                         HStack {
                             Text(word)
                                 .font(.system(.body, design: .monospaced))
+                                .lineLimit(1)
+                                .truncationMode(.tail)
 
                             Spacer()
 
@@ -35,6 +37,8 @@ struct WordListView: View {
                                     .foregroundColor(.secondary)
                             }
                             .buttonStyle(.plain)
+                            .help("Remove \"\(word)\" from dictionary")
+                            .accessibilityLabel("Remove \(word)")
                         }
                         .listRowBackground(Color.clear)
                     }

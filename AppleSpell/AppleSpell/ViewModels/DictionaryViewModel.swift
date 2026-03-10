@@ -9,14 +9,22 @@ class DictionaryViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     @Published var showingError: Bool = false
+    @Published var showingDeleteConfirmation: Bool = false
+    @Published var pendingDeleteWords: [String] = []
+
+    // Cached sorted words to avoid repeated sorting
+    @Published private var sortedWordsCache: [String] = []
+
+    private var cancellables = Set<AnyCancellable>()
+    private var isSaving: Bool = false
 
     var filteredWords: [String] {
         if searchText.isEmpty {
-            return words.sorted()
+            // Return cached sorted words
+            return sortedWordsCache
         }
-        return words
+        return sortedWordsCache
             .filter { $0.localizedCaseInsensitiveContains(searchText) }
-            .sorted()
     }
 
     var wordCount: Int {
@@ -24,29 +32,45 @@ class DictionaryViewModel: ObservableObject {
     }
 
     init() {
+        // Observe changes to words and update cache
+        $words
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] newWords in
+                self?.sortedWordsCache = newWords.sorted()
+            }
+            .store(in: &cancellables)
+
         loadWords()
     }
 
     // MARK: - File Operations
 
     func loadWords() {
+        guard !isLoading else { return }
+
         isLoading = true
         do {
-            words = try DictionaryService.fetchWords()
+            let fetchedWords = try DictionaryService.fetchWords()
+            words = fetchedWords
         } catch {
-            showError(error.localizedDescription)
+            showError("Failed to load dictionary: \(error.localizedDescription)")
         }
         isLoading = false
     }
 
     func addWords(_ newWords: [String]) {
+        guard !newWords.isEmpty else { return }
+
         let uniqueNewWords = newWords
             .flatMap { $0.components(separatedBy: CharacterSet(charactersIn: " ,")) }
             .map { $0.trimmingCharacters(in: .whitespaces) }
             .filter { !$0.isEmpty }
             .filter { !words.contains($0) }
 
-        guard !uniqueNewWords.isEmpty else { return }
+        guard !uniqueNewWords.isEmpty else {
+            // All words were duplicates - could notify user
+            return
+        }
 
         var updatedWords = words
         updatedWords.append(contentsOf: uniqueNewWords)
@@ -56,26 +80,44 @@ class DictionaryViewModel: ObservableObject {
 
     func removeWords(at offsets: IndexSet) {
         let wordsToRemove = offsets.map { filteredWords[$0] }
-        var updatedWords = words
-        updatedWords.removeAll { wordsToRemove.contains($0) }
-
-        saveWords(updatedWords)
+        requestDeleteConfirmation(words: wordsToRemove)
     }
 
     func removeWord(_ word: String) {
-        var updatedWords = words
-        updatedWords.removeAll { $0 == word }
+        requestDeleteConfirmation(words: [word])
+    }
 
+    func confirmDelete() {
+        let wordsToRemove = pendingDeleteWords
+        pendingDeleteWords = []
+        showingDeleteConfirmation = false
+
+        var updatedWords = words
+        updatedWords.removeAll { wordsToRemove.contains($0) }
         saveWords(updatedWords)
     }
 
+    func cancelDelete() {
+        pendingDeleteWords = []
+        showingDeleteConfirmation = false
+    }
+
+    private func requestDeleteConfirmation(words: [String]) {
+        pendingDeleteWords = words
+        showingDeleteConfirmation = true
+    }
+
     private func saveWords(_ updatedWords: [String]) {
+        guard !isSaving else { return }
+
+        isSaving = true
         do {
             try DictionaryService.saveWords(updatedWords)
             words = updatedWords
         } catch {
-            showError(error.localizedDescription)
+            showError("Failed to save dictionary: \(error.localizedDescription)")
         }
+        isSaving = false
     }
 
     // MARK: - Import/Export

@@ -70,6 +70,7 @@ final class UpdateManager: ObservableObject {
         do {
             let url = URL(string: "https://api.github.com/repos/\(repoOwner)/\(repoName)/releases/latest")!
             var request = URLRequest(url: url)
+            request.timeoutInterval = 10
             request.setValue("AppleSpell/\(currentVersion)", forHTTPHeaderField: "User-Agent")
             request.setValue("application/vnd.github+json", forHTTPHeaderField: "Accept")
             request.setValue("2022-11-28", forHTTPHeaderField: "X-GitHub-Api-Version")
@@ -103,6 +104,19 @@ final class UpdateManager: ObservableObject {
                 updateStatus = .updateAvailable(version: latestVersion)
             } else {
                 updateStatus = .upToDate
+            }
+        } catch let error as URLError {
+            switch error.code {
+            case .notConnectedToInternet, .networkConnectionLost, .dnsLookupFailed:
+                updateStatus = .error("No internet connection")
+            case .timedOut:
+                updateStatus = .error("Connection timed out")
+            case .cannotFindHost, .cannotConnectToHost:
+                updateStatus = .error("Cannot connect to server")
+            case .badServerResponse:
+                updateStatus = .error("Server error")
+            default:
+                updateStatus = .error("Network unavailable")
             }
         } catch {
             updateStatus = .error(error.localizedDescription)

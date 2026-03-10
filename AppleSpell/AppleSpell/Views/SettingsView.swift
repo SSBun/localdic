@@ -43,7 +43,7 @@ struct SettingsView: View {
                 .tabItem { Label("About", systemImage: SettingsTab.about.icon) }
                 .tag(SettingsTab.about)
         }
-        .frame(width: 620, height: 560)
+        .frame(width: 400, height: 600)
     }
 
     // MARK: - Section Style

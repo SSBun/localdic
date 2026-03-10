@@ -4,6 +4,8 @@ import AppKit
 struct ContentView: View {
     @EnvironmentObject private var viewModel: DictionaryViewModel
     @State private var newWord: String = ""
+    @FocusState private var isSearchFocused: Bool
+    @FocusState private var isAddWordFocused: Bool
 
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -54,10 +56,17 @@ struct ContentView: View {
 
                     Spacer()
 
-                    Button(action: { viewModel.loadWords() }) {
-                        Label("Refresh", systemImage: "arrow.clockwise")
+                    Button(action: {
+                        viewModel.loadWords()
+                    }) {
+                        Image(systemName: "arrow.clockwise")
+                            .font(.system(size: 12, weight: .medium))
+                            .rotationEffect(.degrees(viewModel.isLoading ? 360 : 0))
+                            .animation(viewModel.isLoading ? .linear(duration: 0.5).repeatForever(autoreverses: false) : .default, value: viewModel.isLoading)
                     }
-                    .buttonStyle(.bordered)
+                    .buttonStyle(.plain)
+                    .keyboardShortcut("r", modifiers: .command)
+                    .help("Refresh word list (Cmd+R)")
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 12)
@@ -70,6 +79,27 @@ struct ContentView: View {
             Button("OK", role: .cancel) {}
         } message: {
             Text(viewModel.errorMessage ?? "Unknown error")
+        }
+        .confirmationDialog(
+            "Remove Words",
+            isPresented: $viewModel.showingDeleteConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button("Remove", role: .destructive) {
+                viewModel.confirmDelete()
+            }
+            Button("Cancel", role: .cancel) {
+                viewModel.cancelDelete()
+            }
+        } message: {
+            if viewModel.pendingDeleteWords.count == 1 {
+                Text("Are you sure you want to remove \"\(viewModel.pendingDeleteWords[0])\" from your dictionary?")
+            } else {
+                Text("Are you sure you want to remove \(viewModel.pendingDeleteWords.count) words from your dictionary?")
+            }
+        }
+        .onAppear {
+            isSearchFocused = true
         }
     }
 
